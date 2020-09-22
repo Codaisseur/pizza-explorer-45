@@ -1,12 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
+const sortByBought = (pizzaA, pizzaB) => {
+  return pizzaB.bought - pizzaA.bought;
+};
+
 const selectUser = (reduxState) => {
   return reduxState.user;
 };
 
 const selectPizzas = (reduxState) => {
-  return reduxState.pizzas;
+  return [...reduxState.pizzas].sort(sortByBought);
 };
 
 export default function PizzaList() {
