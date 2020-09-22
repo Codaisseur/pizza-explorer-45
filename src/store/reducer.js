@@ -45,6 +45,18 @@ export default function reducer(state = initialState, action) {
         ],
       };
     }
+
+    case "TOGGLE_FAVORITE": {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          favorites: state.user.favorites.includes(action.payload)
+            ? state.user.favorites.filter((id) => id !== action.payload)
+            : [...state.user.favorites, action.payload],
+        },
+      };
+    }
     default: {
       return state;
     }
