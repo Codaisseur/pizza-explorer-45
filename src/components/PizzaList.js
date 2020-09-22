@@ -5,8 +5,13 @@ const selectUser = (reduxState) => {
   return reduxState.user;
 };
 
+const selectPizzas = (reduxState) => {
+  return reduxState.pizzas;
+};
+
 export default function PizzaList() {
   const user = useSelector(selectUser);
+  const pizzas = useSelector(selectPizzas);
 
   return (
     <div>
@@ -14,7 +19,7 @@ export default function PizzaList() {
       <p>
         Welcome back, <strong>{user.name}</strong>! Your favorite pizzas:
       </p>
-      <p>TODO: the list of pizzas</p>
+      <p>Please choose from the following {pizzas.length} pizzas:</p>
     </div>
   );
 }
