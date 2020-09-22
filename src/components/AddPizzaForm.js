@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 export default function AddPizzaForm() {
   const [name, set_name] = useState("");
   const [description, set_description] = useState("");
+  const dispatch = useDispatch();
 
   const submit = (event) => {
     // to make sure that the form does not redirect (which is normal browser behavior)
@@ -12,7 +14,19 @@ export default function AddPizzaForm() {
 
     // TODO:
     // - dispatch the ADD_PIZZA action
+    const action = {
+      type: "ADD_PIZZA",
+      payload: {
+        id: Math.round(Math.random() * 100000),
+        name: name,
+        description: description,
+        bought: 0,
+      },
+    };
+    dispatch(action);
     // - clear the input fields
+    set_description("");
+    set_name("");
   };
 
   return (
