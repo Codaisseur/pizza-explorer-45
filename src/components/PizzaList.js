@@ -20,6 +20,21 @@ export default function PizzaList() {
         Welcome back, <strong>{user.name}</strong>! Your favorite pizzas:
       </p>
       <p>Please choose from the following {pizzas.length} pizzas:</p>
+      <ul>
+        {pizzas.map((pizza) => {
+          return (
+            <li key={pizza.id}>
+              <p>
+                <strong>{pizza.name}</strong> ({pizza.description}){" "}
+                <button>♡</button>
+              </p>
+              <p>
+                <i>Bought {pizza.bought} times</i>
+              </p>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }
