@@ -13,6 +13,9 @@ const selectPizzas = (reduxState) => {
   return [...reduxState.pizzas].sort(sortByBought);
 };
 
+const displayFavorite = (user, pizza) =>
+  user.favorites.includes(pizza.id) ? "♥" : "♡";
+
 export default function PizzaList() {
   const user = useSelector(selectUser);
   const pizzas = useSelector(selectPizzas);
@@ -30,7 +33,7 @@ export default function PizzaList() {
             <li key={pizza.id}>
               <p>
                 <strong>{pizza.name}</strong> ({pizza.description}){" "}
-                <button>♡</button>
+                <button>{displayFavorite(user, pizza)}</button>
               </p>
               <p>
                 <i>Bought {pizza.bought} times</i>
