@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const sortByBought = (pizzaA, pizzaB) => {
   return pizzaB.bought - pizzaA.bought;
@@ -19,6 +19,15 @@ const displayFavorite = (user, pizza) =>
 export default function PizzaList() {
   const user = useSelector(selectUser);
   const pizzas = useSelector(selectPizzas);
+  const dispatch = useDispatch();
+
+  function toggleFavorite(pizzaId) {
+    console.log("PIZZA ID:", pizzaId);
+    // 1. create an action { type: "TOGGLE_FAVORITE", payload: pizzaId }
+    const action = { type: "TOGGLE_FAVORITE", payload: pizzaId };
+    // 2. dispatch the action
+    dispatch(action);
+  }
 
   return (
     <div>
@@ -33,7 +42,9 @@ export default function PizzaList() {
             <li key={pizza.id}>
               <p>
                 <strong>{pizza.name}</strong> ({pizza.description}){" "}
-                <button>{displayFavorite(user, pizza)}</button>
+                <button onClick={() => toggleFavorite(pizza.id)}>
+                  {displayFavorite(user, pizza)}
+                </button>
               </p>
               <p>
                 <i>Bought {pizza.bought} times</i>
